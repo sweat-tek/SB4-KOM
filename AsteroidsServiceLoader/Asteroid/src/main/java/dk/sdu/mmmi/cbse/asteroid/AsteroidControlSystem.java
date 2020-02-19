@@ -65,21 +65,21 @@ public class AsteroidControlSystem implements IEntityProcessingService {
         for (int i = 0; i < numPoints; i++) {
             shapex[i] = x + (float) Math.cos(angle + radians) * 26;
             shapey[i] = y + (float) Math.sin(angle + radians) * 26;
-            angle += 2 * 3.1415f / numPoints;
+            angle += 2 * Math.PI / numPoints;
         }
         }
         if(asAsteroid.getSize().equals("MEDIUM")){
         for (int i = 0; i < numPoints; i++) {
             shapex[i] = x + (float) Math.cos(angle + radians) * 16;
             shapey[i] = y + (float) Math.sin(angle + radians) * 16;
-            angle += 2 * 3.1415f / numPoints;
+            angle += 2 * Math.PI / numPoints;
         }
         }
         if(asAsteroid.getSize().equals("SMALL")){
         for (int i = 0; i < numPoints; i++) {
             shapex[i] = x + (float) Math.cos(angle + radians) * 26;
             shapey[i] = y + (float) Math.sin(angle + radians) * 26;
-            angle += 2 * 3.1415f / numPoints;
+            angle += 2 * Math.PI / numPoints;
         }
         }
 

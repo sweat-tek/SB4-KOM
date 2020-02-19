@@ -39,7 +39,7 @@ public class AsteroidPlugin
     
     private Asteroid createLargeAsteroid(GameData gameData){
        float speed = (float) Math.random() * 10f + 40f;
-       float radians = 3.1415f / 2 + (float) Math.random();
+       float radians = Math.PI / 2 + (float) Math.random();
         float x = gameData.getDisplayWidth() / 2 + 100;
         float y = gameData.getDisplayHeight() / 2 + 50;
         Entity asteroid = new Asteroid(LARGE);
