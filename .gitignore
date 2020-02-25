@@ -1,6 +1,4 @@
-/AsteroidsLibGDX/target/
-/AsteroidsEntityFramework/Common/target/
-/AsteroidsEntityFramework/Player/target/
-/AsteroidsEntityFramework/Core/target/
-/AsteroidsEntityFramework/Enemy/target/
-/AsteroidsServiceLoader/Core/target/
+/*/target/
+/*/*/target/
+/*/.idea
+*.iml
