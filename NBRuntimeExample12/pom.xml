@@ -49,11 +49,11 @@
                         <target>1.8</target>
                     </configuration>
                 </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.2</version>
-            </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.1.2</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -61,6 +61,7 @@
     <modules>
         <module>branding</module>
         <module>application</module>
+        <module>HelloWorld</module>
     </modules>
 
     <properties>
