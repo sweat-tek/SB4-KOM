@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-pax provision</actionName>
+            <displayName>pax provision</displayName>
+            <goals>
+                <goal>install</goal>
+                <goal>pax:provision</goal>
+            </goals>
+            <properties>
+                <jpda.listen>maven</jpda.listen>
+            </properties>
+        </action>
+    </actions>

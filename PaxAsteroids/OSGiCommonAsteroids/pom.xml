@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <relativePath>../poms/compiled/</relativePath>
+        <groupId>dk.sdu.mmmi.build</groupId>
+        <artifactId>compiled-bundle-settings</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <properties>
+        <bundle.symbolicName>dk.sdu.mmmi.common</bundle.symbolicName>
+        <bundle.namespace>dk.sdu.mmmi</bundle.namespace>
+    </properties>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>OSGiCommonAsteroids</artifactId>
+    <name>OSGiCommonAsteroids</name>
+    <packaging>bundle</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>OSGiCommon</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+</project>
