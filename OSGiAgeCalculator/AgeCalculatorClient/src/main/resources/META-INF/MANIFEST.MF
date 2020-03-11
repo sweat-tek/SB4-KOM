@@ -1,0 +1,3 @@
+Bundle-SymbolicName: AgeCalculatorClient
+Service-Component: META-INF/component.xml
+

@@ -1,0 +1,3 @@
+Bundle-SymbolicName: AgeCalculatorApi
+Bundle-ActivationPolicy: lazy
+Export-Package: codabook.agecalculator.osgi.ifce
