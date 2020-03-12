@@ -115,19 +115,12 @@
   </dependencies>
   <repositories>
     <repository>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
       <snapshots>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
       </snapshots>
       <id>central</id>
-      <url>https://repo1.maven.org/maven2</url>
-    </repository>
-    <repository>
-      <id>github</id>
-      <name>GitHub sweat-tek Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/sweat-tek/OPC-COMMON</url>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2</url>
     </repository>
   </repositories>
 </project>

@@ -1,0 +1,4 @@
+Bundle-SymbolicName: OSGiCore
+Bundle-ActivationPolicy: lazy
+Service-Component: META-INF/core.xml
+

@@ -1,0 +1,2 @@
+Bundle-SymbolicName: OSGiLaser
+Bundle-ActivationPolicy: lazy
