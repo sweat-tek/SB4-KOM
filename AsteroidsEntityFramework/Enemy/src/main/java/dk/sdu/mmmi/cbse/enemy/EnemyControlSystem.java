@@ -1,36 +1,29 @@
-package dk.sdu.mmmi.cbse.playersystem;
+package dk.sdu.mmmi.cbse.enemy;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.LEFT;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.RIGHT;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.UP;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 /**
  *
- * @author jcs
+ * @author Nick
  */
-public class PlayerControlSystem implements IEntityProcessingService {
+public class EnemyControlSystem implements IEntityProcessingService {
 
     @Override
     public void process(GameData gameData, World world) {
+        for (Entity enemy : world.getEntities(Enemy.class)) {
+            PositionPart positionpart = enemy.getPart(PositionPart.class);
+            MovingPart movingpart = enemy.getPart(MovingPart.class);
 
-        for (Entity player : world.getEntities(Player.class)) {
-            PositionPart positionPart = player.getPart(PositionPart.class);
-            MovingPart movingPart = player.getPart(MovingPart.class);
+            movingpart.setUp(true);
 
-            movingPart.setLeft(gameData.getKeys().isDown(LEFT));
-            movingPart.setRight(gameData.getKeys().isDown(RIGHT));
-            movingPart.setUp(gameData.getKeys().isDown(UP));
-            
-            
-            movingPart.process(gameData, player);
-            positionPart.process(gameData, player);
+            positionpart.process(gameData, enemy);
+            movingpart.process(gameData, enemy);
 
-            updateShape(player);
+            updateShape(enemy);
         }
     }
 
