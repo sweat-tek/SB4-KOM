@@ -1,1 +1,1 @@
-# SB4-KOM-F20
+# SB4-KOM
