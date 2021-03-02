@@ -67,6 +67,7 @@
         <module>Bullet</module>
         <module>Enemy</module>
         <module>Collision</module>
+        <module>CommonBullet</module>
     </modules>
 
     <properties>
