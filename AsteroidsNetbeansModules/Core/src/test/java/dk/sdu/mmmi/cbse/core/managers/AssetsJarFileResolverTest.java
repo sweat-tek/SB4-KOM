@@ -44,19 +44,19 @@ public class AssetsJarFileResolverTest {
         // SETUP
         System.out.println("testJarAssetManager");
        
-        
-        String jarUrl1 =  "c:/Users/jcs/Documents/GitHub/SB4-KOM-F19/AsteroidsNetbeansModules/Core/target/Core-1.0-SNAPSHOT.jar!/assets/images/Ship.png";
-               
-        String jarUrl =   java.nio.file.Paths.get(new File("").getAbsolutePath(), "target", "Core-1.0-SNAPSHOT.jar!", "assets", "images", "Ship.png").toString();
+        //TODO: Change for your own settings
+        //String jarUrl1 = "/Users/jcs/Workspace/GitHub/SB4-KOM-F20/AsteroidsNetbeansModules/Core/target/Core-1.0-SNAPSHOT.jar!/assets/images/Ship.png";               
+        String jarUrl = java.nio.file.Paths.get(new File("").getAbsolutePath(),
+                "target", "Core-1.0-SNAPSHOT.jar!", "assets", "images", "Ship.png").toString();
 
         AssetsJarFileResolver jfhr = new AssetsJarFileResolver();
         AssetManager am = new AssetManager(jfhr);
 
         // TEST
-        am.load(jarUrl1, Texture.class);
+        am.load(jarUrl, Texture.class);
         am.finishLoading();
         
-        Texture result = am.get(jarUrl1, Texture.class);
+        Texture result = am.get(jarUrl, Texture.class);
 
         // ASSERTS
         assertNotNull(result.getTextureData());
