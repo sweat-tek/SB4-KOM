@@ -44,7 +44,6 @@ public class AsteroidPlugin
         float y = gameData.getDisplayHeight() / 2 + 50;
         Entity asteroid = new Asteroid(LARGE);
 
-        asteroid.setColor(new float[]{255f, 0f, 160f, 1f});
         asteroid.add(new MovingPart(0, speed, speed, 0));
         asteroid.add(new PositionPart(x, y, radians));
         asteroid.add(new LifePart(6, 69));
