@@ -2,7 +2,6 @@ package dk.sdu.mmmi.cbse.common.data;
 
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,7 +13,6 @@ public class Entity implements Serializable {
     private float[] shapeX = new float[4];
     private float[] shapeY = new float[4];
     private float radius;
-    private float[] colour;
     private Map<Class, EntityPart> parts;
 
     public Entity() {
@@ -61,11 +59,4 @@ public class Entity implements Serializable {
         this.shapeY = shapeY;
     }
 
-    public float[] getColour() {
-        return this.colour;
-    }
-
-    public void setColour(float[] c) {
-        this.colour = c;
-    }
 }
