@@ -9,7 +9,6 @@ public class Activator implements BundleActivator {
 
     @Override
     public void start(BundleContext context) throws Exception {
-        System.out.println("LOADED");
 
         LaserSystem ls = new LaserSystem();
         context.registerService(IEntityProcessingService.class, ls, null);
