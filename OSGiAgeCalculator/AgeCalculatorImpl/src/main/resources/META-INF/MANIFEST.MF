@@ -1,3 +1,0 @@
-Bundle-SymbolicName: AgeCalculatorImpl
-Bundle-ActivationPolicy: lazy
-Service-Component: META-INF/component.xml

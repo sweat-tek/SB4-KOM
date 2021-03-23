@@ -15,6 +15,7 @@ public class Activator implements BundleActivator {
         context.registerService(BulletSPI.class, ls, null);
     }
 
+    @Override
     public void stop(BundleContext context) throws Exception {
     }
 
