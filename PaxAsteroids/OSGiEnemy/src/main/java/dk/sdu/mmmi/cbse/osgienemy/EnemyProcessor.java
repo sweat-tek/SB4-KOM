@@ -11,6 +11,9 @@ import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 
 public class EnemyProcessor implements IEntityProcessingService {
 
+    private BulletSPI bulletService;
+
+
     @Override
     public void process(GameData gameData, World world) {
 
@@ -22,7 +25,12 @@ public class EnemyProcessor implements IEntityProcessingService {
             movingPart.setLeft(random < 0.2);
             movingPart.setRight(random > 0.3 && random < 0.5);
             movingPart.setUp(random > 0.7 && random < 0.9);
-
+            
+            if (random > 0.98) {
+                Entity bullet = bulletService.createBullet(entity, gameData);
+                world.addEntity(bullet);
+            }
+            
             movingPart.process(gameData, entity);
             positionPart.process(gameData, entity);            
             updateShape(entity);
@@ -52,5 +60,14 @@ public class EnemyProcessor implements IEntityProcessingService {
 
         entity.setShapeX(shapex);
         entity.setShapeY(shapey);
+    }
+
+    //TODO: Dependency injection via Declarative Services
+    public void setBulletService(BulletSPI bulletService) {
+        this.bulletService = bulletService;
+    }
+
+    public void removeBulletService() {
+        this.bulletService = null;
     }
 }

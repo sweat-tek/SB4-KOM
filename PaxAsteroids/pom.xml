@@ -55,6 +55,9 @@
         <module>OSGiCommonAsteroids</module>
         <module>OSGiCommonBullet</module>
         <module>OSGiCommonEnemy</module>
+        <module>OSGiAsteroidSplitter</module>
+        <module>OSGiAsteroids</module>
+        <module>OSGiLaser</module>
         <module>OSGiEnemy</module>
         <module>OSGiLibGDX</module>
     </modules>
@@ -71,6 +74,7 @@
                     -->
                     <provision>
                         <param>--platform=felix</param>
+                        <param>--vmOptions=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005</param>
                     </provision>                    
                 </configuration>
                 <executions>
