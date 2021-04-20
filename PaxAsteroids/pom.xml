@@ -60,7 +60,6 @@
       <module>OSGiLaser</module>
       <module>OSGiEnemy</module>
       <module>OSGiLibGDX</module>
-      <module>OSGiTensorflow</module>      
   </modules>
       
   <build>
