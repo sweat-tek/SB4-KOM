@@ -1,0 +1,3 @@
+module Player {
+    requires Common;
+}
