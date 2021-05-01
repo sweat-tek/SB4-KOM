@@ -6,3 +6,8 @@
 *.jar
 /*/runner/
 /JavaModularAsteroids/nbproject/private/
+tags
+workspace/
+.classpath
+.project
+.settings/
