@@ -5,23 +5,25 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
 import dk.sdu.mmmi.cbse.main.Game;
 
-public class Player extends SpaceObject {
+import java.util.ArrayList;
+import java.util.Random;
 
-  private boolean left;
-  private boolean right;
-  private boolean up;
-
+public class Enemy extends SpaceObject {
   private float maxSpeed;
   private float acceleration;
   private float deceleration;
+  private Random directionRandomizer;
+  private ArrayList<Bullet> bullets;
 
-  public Player() {
+  public Enemy(ArrayList<Bullet> bullets) {
+    directionRandomizer = new Random();
 
-    x = Game.WIDTH / 2;
-    y = Game.HEIGHT / 2;
+    x = Game.WIDTH - 30;
+    y = Game.HEIGHT - 50;
+    this.bullets = bullets;
 
-    maxSpeed = 300;
-    acceleration = 200;
+    maxSpeed = 100;
+    acceleration = 70;
     deceleration = 10;
 
     shapex = new float[4];
@@ -44,30 +46,19 @@ public class Player extends SpaceObject {
     shapex[3] = x + MathUtils.cos(radians + 4 * 3.1415f / 5) * 8;
     shapey[3] = y + MathUtils.sin(radians + 4 * 3.1415f / 5) * 8;
   }
-
-  public void setLeft(boolean b) {
-    left = b;
-  }
-
-  public void setRight(boolean b) {
-    right = b;
-  }
-
-  public void setUp(boolean b) {
-    up = b;
-  }
-
   public void update(float dt) {
 
     // turning
-    if (left) {
+    boolean goLeft = getRandomDirection();
+    if (goLeft) {
       radians += rotationSpeed * dt;
-    } else if (right) {
+    } else {
       radians -= rotationSpeed * dt;
     }
 
     // accelerating
-    if (up) {
+    boolean shouldAccelerate = getRandomDirection();
+    if (shouldAccelerate) {
       dx += MathUtils.cos(radians) * acceleration * dt;
       dy += MathUtils.sin(radians) * acceleration * dt;
     }
@@ -92,18 +83,31 @@ public class Player extends SpaceObject {
 
     // screen wrap
     wrap();
+    // fire away
+    shoot();
+  }
+
+  private boolean getRandomDirection() {
+    return directionRandomizer.nextBoolean();
+  }
+
+  public void shoot() {
+    if(bullets.size() == 8) {
+      return;
+    }
+    bullets.add(new Bullet(x, y, Game.WIDTH, Game.HEIGHT, radians));
   }
 
   public void draw(ShapeRenderer sr) {
 
-    sr.setColor(1, 1, 1, 1);
+    sr.setColor(1, 0, 1, 1);
 
     sr.begin(ShapeType.Line);
 
     for (int i = 0, j = shapex.length - 1; i < shapex.length; j = i++) {
+
       sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
     }
-
     sr.end();
   }
 }
