@@ -11,3 +11,4 @@ workspace/
 .classpath
 .project
 .settings/
+.factorypath
