@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <all.clusters>${project.build.directory}/${brandingToken}</all.clusters>
         <netbeans.run.params.ide/>
-        <netbeans.run.params>${netbeans.run.params.ide} --nosplash</netbeans.run.params>
+        <netbeans.run.params>${netbeans.run.params.ide}  -J-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=localhost:5005 --nosplash</netbeans.run.params>
     </properties>
 
     <dependencies>
