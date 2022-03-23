@@ -22,4 +22,6 @@ public class Installer extends ModuleInstall {
 
         new LwjglApplication(g, cfg);
     }
+
+
 }
