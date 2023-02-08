@@ -9,7 +9,9 @@ public class SpaceObject {
 	
 	protected float dx;
 	protected float dy;
-	
+
+	protected float pi = 3.1415f;
+
 	protected float radians;
 	protected float speed;
 	protected float rotationSpeed;
