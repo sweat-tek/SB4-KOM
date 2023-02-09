@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <libGDX.version>1.9.10</libGDX.version>
+        <libGDX.version>1.11.0</libGDX.version>
     </properties>
     
     <repositories>
@@ -75,14 +75,4 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
-            </plugin>
-        </plugins>
-    </build>
-    
 </project>
