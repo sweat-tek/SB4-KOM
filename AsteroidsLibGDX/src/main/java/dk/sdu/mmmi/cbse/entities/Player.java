@@ -90,8 +90,13 @@ public class Player extends SpaceObject {
 
     public void shoot() {
         if( this.bullets.size() == MAX_BULLETS) return;
-         this.bullets.add(new Bullet(x, y, radians));
+        this.bullets.add(new Bullet(x, y, radians));
+    }
 
+    public void hit() {
+        System.out.println("Player hit");
+
+        
     }
 
     public void update(float dt) {

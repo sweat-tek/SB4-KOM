@@ -43,6 +43,19 @@ public class PlayState extends GameState {
 
 	}
 
+	private void splitAsteroids(Asteroid a) {
+		numAsteroidsLeft--;
+		if( a.getType() == Asteroid.LARGE) {
+			asteroids.add(new Asteroid(a.getX(), a.getY(), Asteroid.MEDIUM));
+			asteroids.add(new Asteroid(a.getX(), a.getY(), Asteroid.MEDIUM));
+		}
+		if( a.getType() == Asteroid.MEDIUM) {
+			asteroids.add(new Asteroid(a.getX(), a.getY(), Asteroid.SMALL));
+			asteroids.add(new Asteroid(a.getX(), a.getY(), Asteroid.SMALL));
+		}
+
+	}
+
 	private void spawnAsteroids() {
 		asteroids.clear();
 		int numToSpawn = 4 + level -1;
@@ -95,7 +108,43 @@ public class PlayState extends GameState {
 				i--;
 			}
 		}
+
+		// check collision
+		checkCollision();
 		
+	}
+
+	private void checkCollision() {
+		// player-asteroid collision
+		for (int i = 0; i < asteroids.size(); i++) {
+			Asteroid a = asteroids.get(i);
+
+			if( a.intersects(player)) {
+				player.hit();
+				asteroids.remove(i);
+				splitAsteroids(a);
+				break;
+			}
+		}
+
+
+		// bullet-asteroid
+		for (int i = 0; i < bullets.size(); i++) {
+			Bullet b = bullets.get(i);
+			for (int j = 0; j < asteroids.size(); j++) {
+				Asteroid a = asteroids.get(j);
+
+				// If a contains b
+				if(a.contains(b.getX(), b.getY()) ) {
+					bullets.remove(i);
+					i--;
+					asteroids.remove(j);
+					j--;
+					splitAsteroids(a);
+					break;
+				}
+			}
+		}
 	}
 	
 	public void draw() {

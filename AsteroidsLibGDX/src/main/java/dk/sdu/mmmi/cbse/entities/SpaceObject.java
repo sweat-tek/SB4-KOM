@@ -36,6 +36,35 @@ public class SpaceObject {
 	public float getY() {
 		return y;
 	}
+
+	public float[] getShapex() {
+		return shapex;
+	}
+
+	public float[] getShapey() {
+		return shapey;
+	}
+
+	public boolean intersects(SpaceObject other) {
+		float[] sx = other.getShapex();
+		float[] sy = other.getShapey();
+		for (int i = 0; i < sx.length; i++) {
+			if( contains(sx[i], sy[i])) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean contains(float x, float y) {
+		boolean b = false;
+		for (int i = 0, j = shapex.length -1; i < shapex.length ; j = i++) {
+			if((shapey[i] > y) != (shapey[j] > y) && (x < (shapex[j] - shapex[i]) * (y - shapey[i]) / (shapey[j] - shapey[i]) + shapex[i])) {
+				b = !b;
+			}
+		}
+		return b;
+	}
 }
 
 
