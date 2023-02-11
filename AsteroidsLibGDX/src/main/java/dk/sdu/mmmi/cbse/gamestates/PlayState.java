@@ -52,7 +52,7 @@ public class PlayState extends GameState {
 		spawnAsteroids();
 
 		fsTimer = 0;
-		fsTime = 15;
+		fsTime = 3;
 		enemyBullets = new ArrayList<>();
 
 
@@ -119,6 +119,9 @@ public class PlayState extends GameState {
 		player.update(dt);
 		if( player.isDead() ) {
 			player.reset();
+			flyingSaucer = null;
+			//Jukebox.stop("smallsaucer");
+			//Jukebox.stop("largesaucer");
 			return;
 		}
 
@@ -209,6 +212,90 @@ public class PlayState extends GameState {
 					asteroids.remove(j);
 					j--;
 					splitAsteroids(a);
+					break;
+				}
+			}
+		}
+
+		// flyingsaucer - player
+		if( flyingSaucer != null ) {
+			if( player.intersects(flyingSaucer) ) {
+				player.hit();
+				createParticles(player.getX(), player.getY());
+				createParticles(flyingSaucer.getX(), flyingSaucer.getY());
+				flyingSaucer = null;
+				//Jukebox.stop("smallsaucer");
+				//Jukebox.stop("largesaucer");
+				//Jukebox.play("explode");
+			}
+		}
+
+		// enemybullet - player
+		if( !player.isHit() ) {
+			for (int i = 0; i < enemyBullets.size(); i++) {
+				Bullet b = enemyBullets.get(i);
+				if( player.contains(b.getX(), b.getY())) {
+					player.hit();
+					enemyBullets.remove(i);
+					i--;
+					//Jukebox.play("explode");
+					break;
+				}
+			}
+		}
+
+		// enemybullet - asteroids
+		for (int i = 0; i < enemyBullets.size(); i++) {
+			Bullet b = enemyBullets.get(i);
+			for (int j = 0; j < asteroids.size(); j++) {
+				Asteroid a = asteroids.get(i);
+				if( a.contains(b.getX(), b.getY())) {
+					asteroids.remove(j);
+					j--;
+					splitAsteroids(a);
+					enemyBullets.remove(i);
+					i--;
+					createParticles(a.getX(), a.getY());
+					//Jukebox.play("explode");
+					break;
+				}
+			}
+		}
+
+		// playerbullet - flyingsaucer
+		if( flyingSaucer != null ) {
+			for (int i = 0; i < bullets.size(); i++) {
+				Bullet b = bullets.get(i);
+				if( flyingSaucer.contains(b.getX(), b.getY())) {
+					bullets.remove(i);
+					i--;
+					createParticles(flyingSaucer.getX(), flyingSaucer.getY());
+					//player.incrementScore(flyingSaucer.getScore());
+					flyingSaucer = null;
+					//Jukebox.stop("smallsaucer");
+					//Jukebox.stop("largesaucer");
+					//Jukebox.play("explode");
+
+					break;
+				}
+			}
+		}
+
+		// asteroids - flyingsaucer
+		if( flyingSaucer != null ) {
+			for (int i = 0; i < asteroids.size(); i++) {
+				Asteroid a = asteroids.get(i);
+				if( a.intersects(flyingSaucer) ) {
+					asteroids.remove(i);
+					i--;
+					splitAsteroids(a);
+					createParticles(a.getX(), a.getY());
+					createParticles(flyingSaucer.getX(), flyingSaucer.getY());
+					flyingSaucer = null;
+					//Jukebox.stop("smallsaucer");
+					//Jukebox.stop("largesaucer");
+					//Jukebox.play("explode");
+
 					break;
 				}
 			}
