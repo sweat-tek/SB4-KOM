@@ -5,7 +5,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
 import dk.sdu.mmmi.cbse.main.Game;
 
+import java.util.ArrayList;
+
 public class Player extends SpaceObject {
+
+    private final int MAX_BULLETS = 4;
+    private ArrayList<Bullet> bullets;
 
     private float[] flamex;
     private float[] flamey;
@@ -19,7 +24,13 @@ public class Player extends SpaceObject {
     private float deceleration;
     private float accelerationTimer;
 
-    public Player() {
+    //private float x;
+    //private float y;
+    //private float radians;
+
+    public Player(ArrayList<Bullet> bullets) {
+
+        this.bullets = bullets;
 
         x = Game.WIDTH / 2;
         y = Game.HEIGHT / 2;
@@ -75,6 +86,12 @@ public class Player extends SpaceObject {
 
     public void setUp(boolean b) {
         up = b;
+    }
+
+    public void shoot() {
+        if( this.bullets.size() == MAX_BULLETS) return;
+         this.bullets.add(new Bullet(x, y, radians));
+
     }
 
     public void update(float dt) {
