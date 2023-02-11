@@ -2,10 +2,7 @@ package dk.sdu.mmmi.cbse.gamestates;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
-import dk.sdu.mmmi.cbse.entities.Asteroid;
-import dk.sdu.mmmi.cbse.entities.Bullet;
-import dk.sdu.mmmi.cbse.entities.Particle;
-import dk.sdu.mmmi.cbse.entities.Player;
+import dk.sdu.mmmi.cbse.entities.*;
 import dk.sdu.mmmi.cbse.main.Game;
 import dk.sdu.mmmi.cbse.managers.GameKeys;
 import dk.sdu.mmmi.cbse.managers.GameStateManager;
@@ -21,6 +18,11 @@ public class PlayState extends GameState {
 	private ArrayList<Bullet> bullets;
 	private ArrayList<Asteroid> asteroids;
 	private ArrayList<Particle> particles;
+
+	private FlyingSaucer flyingSaucer;
+	private float fsTimer;
+	private float fsTime;
+	private ArrayList<Bullet> enemyBullets;
 
 	private int level;
 	private int totalAsteroids;
@@ -48,6 +50,11 @@ public class PlayState extends GameState {
 
 		// Spawn Asteroids
 		spawnAsteroids();
+
+		fsTimer = 0;
+		fsTime = 15;
+		enemyBullets = new ArrayList<>();
+
 
 	}
 
@@ -122,8 +129,35 @@ public class PlayState extends GameState {
 				bullets.remove(i);
 				i--;
 			}
-
 		}
+
+		// update flying saucer
+		if( flyingSaucer == null ) {
+			fsTimer += dt;
+			if( fsTimer > fsTime ) {
+				fsTimer = 0;
+				int type = MathUtils.random() < 0.5 ? FlyingSaucer.LARGE : FlyingSaucer.SMALL;
+				int direction = MathUtils.random() < 0.5 ? FlyingSaucer.RIGHT : FlyingSaucer.LEFT;
+				flyingSaucer = new FlyingSaucer(type, direction, player, enemyBullets);
+			}
+		} else {
+			flyingSaucer.update(dt);
+			if( flyingSaucer.shouldRemove()) {
+				flyingSaucer = null;
+				//Jukebox.stop("smallsaucer");
+				//Jukebox.stop("largesaucer");
+			}
+		}
+
+		// update flyingsaucer bullets
+		for( int i = 0 ; i < enemyBullets.size() ; i++ ) {
+			enemyBullets.get(i).update(dt);
+			if( enemyBullets.get(i).shouldRemove()) {
+				enemyBullets.remove(i);
+				i--;
+			}
+		}
+
 
 		// update asteroids
 		for (int i = 0; i < asteroids.size(); i++) {
@@ -188,6 +222,16 @@ public class PlayState extends GameState {
 		// draw bullets
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).draw(sr);
+		}
+
+		// draw flying saucer
+		if( flyingSaucer != null ) {
+			flyingSaucer.draw(sr);
+		}
+
+		// draw flyingsaucer bullets
+		for (int i = 0; i < enemyBullets.size(); i++) {
+			enemyBullets.get(i).draw(sr);
 		}
 
 		// draw asteroids
