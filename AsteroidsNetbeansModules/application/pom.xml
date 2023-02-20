@@ -17,7 +17,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <all.clusters>${project.build.directory}/${brandingToken}</all.clusters>
         <netbeans.run.params.ide/>
-        <netbeans.run.params>${netbeans.run.params.ide} -J-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:5005 --nosplash</netbeans.run.params>
     </properties>
 
     <dependencies>
@@ -57,11 +56,11 @@
             <artifactId>Common</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>SilentUpdate</artifactId>
             <version>${project.version}</version>
-        </dependency>
+        </dependency>-->
 
         
 <!--        <dependency>-->
@@ -85,6 +84,31 @@
             <artifactId>CommonAsteroids</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Player</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Bullet</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Enemy</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Collision</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Asteroid</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -103,12 +127,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.12.2</version>
+                <version>3.0.0-M7</version>
                 <configuration>
+                    <argLine>
+                        --add-opens=java.base/java.net=ALL-UNNAMED
+                        --add-opens=java.base/java.lang.ref=ALL-UNNAMED
+                    </argLine>
                     <systemPropertyVariables>
                         <all.clusters>${all.clusters}</all.clusters>
                         <branding.token>${brandingToken}</branding.token>
                     </systemPropertyVariables>
+
                 </configuration>
             </plugin>
         </plugins>

@@ -57,7 +57,7 @@ public class CollisionDetectorTest {
         Entity entity2 = null;
         CollisionDetector instance = new CollisionDetector();
         Boolean expResult = null;
-        Boolean result = instance.Collides(entity, entity2);
+        Boolean result = instance.collides(entity, entity2);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

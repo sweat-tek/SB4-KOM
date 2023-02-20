@@ -71,7 +71,7 @@
     </modules>
 
     <properties>
-        <netbeans.version>RELEASE112</netbeans.version>
+        <netbeans.version>RELEASE150</netbeans.version>
         <brandingToken>asteroidsnetbeansmodules</brandingToken>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

@@ -90,7 +90,7 @@
         </dependency>
     </dependencies>
     <properties>
-        <libGDX.version>1.5.0</libGDX.version>
+        <libGDX.version>1.11.0</libGDX.version>
     </properties>
     <build>
         <plugins>

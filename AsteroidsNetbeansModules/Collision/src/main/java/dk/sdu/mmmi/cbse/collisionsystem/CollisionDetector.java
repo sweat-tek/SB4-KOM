@@ -27,7 +27,7 @@ public class CollisionDetector implements IPostEntityProcessingService {
                 }
 
                 // CollisionDetection
-                if (this.Collides(entity, collisionDetection)) {
+                if (this.collides(entity, collisionDetection)) {
                     // if entity has been hit, and should have its life reduced
                     if (entityLife.getLife() > 0) {
                         entityLife.setLife(entityLife.getLife() - 1);
@@ -42,7 +42,7 @@ public class CollisionDetector implements IPostEntityProcessingService {
         }
     }
 
-    public Boolean Collides(Entity entity, Entity entity2) {
+    public Boolean collides(Entity entity, Entity entity2) {
         PositionPart entMov = entity.getPart(PositionPart.class);
         PositionPart entMov2 = entity2.getPart(PositionPart.class);
         float dx = (float) entMov.getX() - (float) entMov2.getX();
