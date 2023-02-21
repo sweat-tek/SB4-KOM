@@ -16,10 +16,15 @@
         <module>Player</module>
         <module>Asteroid</module>
         <module>Collision</module>
+        <module>CommonEnemy</module>
+        <module>CommonBullet</module>
+        <module>CommonAsteroids</module>
+        <module>Bullet</module>
+        <module>Enemy</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>        
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.9</maven.compiler.source>
+        <maven.compiler.target>1.9</maven.compiler.target>
     </properties>
 </project>
