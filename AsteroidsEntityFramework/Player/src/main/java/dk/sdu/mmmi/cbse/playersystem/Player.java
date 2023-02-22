@@ -1,12 +1,14 @@
 package dk.sdu.mmmi.cbse.playersystem;
 
+import com.badlogic.gdx.graphics.Color;
 import dk.sdu.mmmi.cbse.common.data.Entity;
-import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 
 /**
  *
  * @author corfixen
  */
 public class Player extends Entity {
-
+	public Player(){
+		super.setColor(Color.GREEN);
+	}
 }

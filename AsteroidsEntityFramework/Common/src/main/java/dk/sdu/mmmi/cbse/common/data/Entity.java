@@ -1,6 +1,8 @@
 package dk.sdu.mmmi.cbse.common.data;
 
+import com.badlogic.gdx.graphics.Color;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
+
 import java.io.Serializable;
 import java.util.Map;
 import java.util.UUID;
@@ -11,7 +13,13 @@ public class Entity implements Serializable {
 
     private float[] shapeX = new float[4];
     private float[] shapeY = new float[4];
-    private float radius;
+    private float hitBoxRadius = 1;
+    private float sqrtHitBoxRadius = (float) Math.sqrt(hitBoxRadius);
+    private float size = 1;
+
+    private boolean bCollidable = true;
+
+    private Color color = Color.PINK;
     private Map<Class, EntityPart> parts;
     
     public Entity() {
@@ -30,12 +38,13 @@ public class Entity implements Serializable {
         return (E) parts.get(partClass);
     }
     
-    public void setRadius(float r){
-        this.radius = r;
+    public void setHitBoxRadius(float r){
+        this.hitBoxRadius = r;
+        this.sqrtHitBoxRadius = (float) Math.sqrt(r);
     }
     
-    public float getRadius(){
-        return radius;
+    public float getHitBoxRadius(){
+        return hitBoxRadius;
     }
 
     public String getID() {
@@ -56,5 +65,33 @@ public class Entity implements Serializable {
 
     public void setShapeY(float[] shapeY) {
         this.shapeY = shapeY;
+    }
+
+    public float getSize() {
+        return size;
+    }
+
+    public void setSize(float size) {
+        this.size = size;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public boolean isbCollidable() {
+        return bCollidable;
+    }
+
+    public void setbCollidable(boolean bCollidable) {
+        this.bCollidable = bCollidable;
+    }
+
+    public float getSqrtHitBoxRadius() {
+        return sqrtHitBoxRadius;
     }
 }
