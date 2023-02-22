@@ -6,7 +6,7 @@
         <artifactId>asteroids.serviceloader</artifactId>
         <version>1.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>common</artifactId>
+    <artifactId>Common</artifactId>
     <packaging>jar</packaging>
     <name>Common</name>
     <build>
