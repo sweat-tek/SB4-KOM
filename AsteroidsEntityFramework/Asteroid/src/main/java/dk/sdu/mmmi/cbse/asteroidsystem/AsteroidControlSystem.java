@@ -1,6 +1,5 @@
 package dk.sdu.mmmi.cbse.asteroidsystem;
 
-import com.badlogic.gdx.math.MathUtils;
 import dk.sdu.mmmi.cbse.common.asteroidssystem.Asteroid;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
@@ -9,6 +8,8 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+
+import java.util.Random;
 
 
 public class AsteroidControlSystem implements IEntityProcessingService {
@@ -21,9 +22,11 @@ public class AsteroidControlSystem implements IEntityProcessingService {
             MovingPart movingPart = asteroid.getPart(MovingPart.class);
             LifePart lifePart = asteroid.getPart(LifePart.class);
 
-            movingPart.setLeft(MathUtils.randomBoolean());
-            movingPart.setRight(MathUtils.randomBoolean());
-            movingPart.setUp(MathUtils.randomBoolean());
+            Random random = new Random();
+
+            movingPart.setLeft(random.nextBoolean());
+            movingPart.setRight(random.nextBoolean());
+            movingPart.setUp(random.nextBoolean());
 
             movingPart.process(gameData, asteroid);
             positionPart.process(gameData, asteroid);

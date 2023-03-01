@@ -1,6 +1,5 @@
 package dk.sdu.mmmi.cbse.enemysystem;
 
-import com.badlogic.gdx.math.MathUtils;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -9,6 +8,8 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.enemysystem.Enemy;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+
+import java.util.Random;
 
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.*;
 
@@ -21,9 +22,11 @@ public class EnemyControlSystem implements IEntityProcessingService {
             MovingPart movingPart = enemy.getPart(MovingPart.class);
             LifePart lifePart = enemy.getPart(LifePart.class);
 
-            movingPart.setLeft(MathUtils.randomBoolean());
-            movingPart.setRight(MathUtils.randomBoolean());
-            movingPart.setUp(MathUtils.randomBoolean());
+            Random random = new Random();
+
+            movingPart.setLeft(random.nextBoolean());
+            movingPart.setRight(random.nextBoolean());
+            movingPart.setUp(random.nextBoolean());
 
             movingPart.process(gameData, enemy);
             positionPart.process(gameData, enemy);
