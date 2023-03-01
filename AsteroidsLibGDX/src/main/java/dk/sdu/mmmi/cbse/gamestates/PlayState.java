@@ -52,7 +52,7 @@ public class PlayState extends GameState {
 		spawnAsteroids();
 
 		fsTimer = 0;
-		fsTime = 3;
+		fsTime = 15;
 		enemyBullets = new ArrayList<>();
 
 

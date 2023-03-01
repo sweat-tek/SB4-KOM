@@ -25,7 +25,7 @@ public class GameKeys {
 			pkeys[i] = keys[i];
 		}
 	}
-	
+
 	public static void setKey(int k, boolean b) {
 		keys[k] = b;
 	}
@@ -37,7 +37,6 @@ public class GameKeys {
 	public static boolean isPressed(int k) {
 		return keys[k] && !pkeys[k];
 	}
-	
 }
 
 
