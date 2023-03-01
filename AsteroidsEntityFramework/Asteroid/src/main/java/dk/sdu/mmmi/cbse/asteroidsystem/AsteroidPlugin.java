@@ -1,5 +1,6 @@
 package dk.sdu.mmmi.cbse.asteroidsystem;
 
+import dk.sdu.mmmi.cbse.common.asteroidssystem.Asteroid;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -35,6 +36,7 @@ public class AsteroidPlugin implements IGamePluginService {
         float x = gameData.getDisplayWidth() / 2;
         float y = gameData.getDisplayHeight();
         float radians = 3.1415f / 2;
+
 
         Entity asteroid = new Asteroid();
         asteroid.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));

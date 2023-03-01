@@ -5,20 +5,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import dk.sdu.mmmi.cbse.asteroidsystem.AsteroidControlSystem;
-import dk.sdu.mmmi.cbse.asteroidsystem.AsteroidPlugin;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
-import dk.sdu.mmmi.cbse.common.utilities.SPIAsteroidsLocator;
-import dk.sdu.mmmi.cbse.common.utilities.SPILocator;
-import dk.sdu.mmmi.cbse.enemysystem.EnemyControlSystem;
+import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
+import dk.sdu.mmmi.cbse.common.util.SPIAsteroidsLocator;
 import dk.sdu.mmmi.cbse.managers.GameInputProcessor;
-import dk.sdu.mmmi.cbse.playersystem.PlayerControlSystem;
-import dk.sdu.mmmi.cbse.playersystem.PlayerPlugin;
-import dk.sdu.mmmi.cbse.enemysystem.EnemyPlugin;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +26,8 @@ public class Game
     private final GameData gameData = new GameData();
     private List<IEntityProcessingService> entityProcessors = new ArrayList<>();
     private List<IGamePluginService> entityPlugins = new ArrayList<>();
+
+    private List<IPostEntityProcessingService> postEntityProcessors = new ArrayList<>();
     private World world = new World();
 
     @Override
@@ -73,9 +70,8 @@ public class Game
         }
         */
 
-
-        // Lookup all Game Plugins using ServiceLoader  locateAll=metodekald
-        for (IGamePluginService iGamePlugin : SPILocator.locateAll(IGamePluginService.class)) {
+        // Lookup all Game Plugins using ServiceLocator
+        for (IGamePluginService iGamePlugin : SPIAsteroidsLocator.locate(IGamePluginService.class)) {
             iGamePlugin.start(gameData, world);
         }
 
@@ -99,15 +95,22 @@ public class Game
 
     private void update() {
 
-        for (IEntityProcessingService entityProcessingService : SPILocator.locateAll(IEntityProcessingService.class)){
+        for (IEntityProcessingService entityProcessingService : SPIAsteroidsLocator.locate(IEntityProcessingService.class)){
             entityProcessingService.process(gameData, world);
         }
 
+        for (IPostEntityProcessingService entityPostProcessingService : SPIAsteroidsLocator.locate(IPostEntityProcessingService.class)){
+            entityPostProcessingService.process(gameData, world);
+        }
+
         /*
-        // Update DataOriented
+        // Update DataOriented game design
         for (IEntityProcessingService entityProcessorService : entityProcessors) {
             entityProcessorService.process(gameData, world);
-        }*/
+        }
+
+        for (IPostEntityProcessingService entityPostProcessorService : postEntityProcessors) {
+            entityPostProcessorService.process(gameData, world);}*/
     }
 
     private void draw() {
