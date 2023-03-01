@@ -90,7 +90,7 @@
         </dependency>
         <dependency>
             <groupId>dk.sdu.mmmi.cbse</groupId>
-            <artifactId>player</artifactId>
+            <artifactId>Player</artifactId>
             <version>1.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
