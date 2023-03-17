@@ -1,0 +1,22 @@
+plugins {
+    id 'org.javamodularity.moduleplugin' version '1.8.12' apply false
+}
+
+// LibGDX breaks if it gets the module plugin, we patch it manually in Core.
+configure(subprojects.findAll {it.name != 'LibGDX'}) {
+    apply plugin: 'java'
+    apply plugin: "org.javamodularity.moduleplugin"
+}
+
+allprojects {
+    version = "1.0"
+
+    ext {
+        appName = "Asteroids"
+        gdxVersion = "1.11.0"
+    }
+
+    repositories {
+        mavenCentral()
+    }
+}

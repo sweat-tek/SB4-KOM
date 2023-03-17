@@ -1,0 +1,3 @@
+rootProject.name = 'Asteroids'
+
+include 'Common', 'Core', 'LibGDX', 'Player'
