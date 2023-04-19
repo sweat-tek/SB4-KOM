@@ -22,17 +22,16 @@ public class BulletControlSystem implements IEntityProcessingService, IBulletSPI
             PositionPart positionPart = bullet.getPart(PositionPart.class);
             MovingPart movingPart = bullet.getPart(MovingPart.class);
             TimePart timePart = bullet.getPart(TimePart.class);
-
+            movingPart.setUp(true);
             if (timePart.getExpiration() < 0){
                 world.removeEntity(bullet);
             }
 
+            timePart.process(gameData, bullet);
             movingPart.process(gameData, bullet);
             positionPart.process(gameData, bullet);
-            timePart.process(gameData, bullet);
 
             updateShape(bullet);
-
         }
 
     }
@@ -44,18 +43,18 @@ public class BulletControlSystem implements IEntityProcessingService, IBulletSPI
         float y = shooterPosition.getY();
         float radians = shooterPosition.getRadians();
         float dt = gameData.getDelta();
-        float speed = 300;
+        float speed = 350;
 
-        Entity bullet = new Entity();
-        bullet.setRadius(3);
+        Entity bullet = new Bullet();
+        bullet.setRadius(2);
 
         float shotX = (float) cos(radians) * shooter.getRadius() * bullet.getRadius();
         float shotY = (float) sin(radians) * shooter.getRadius() * bullet.getRadius();
 
         bullet.add(new PositionPart(shotX + x, shotY +y, radians));
-        bullet.add(new MovingPart(0, 400, 500, 0));
+        bullet.add(new MovingPart(0, 5000000, speed, 5));
         bullet.add(new LifePart(1));
-        //bullet.add(new TimePart(1));
+        bullet.add(new TimePart(1));
 
         bullet.setShapeX(new float[2]);
         bullet.setShapeY(new float[2]);

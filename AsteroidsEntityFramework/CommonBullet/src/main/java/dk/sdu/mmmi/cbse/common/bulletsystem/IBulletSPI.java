@@ -6,4 +6,5 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 public interface IBulletSPI {
     Entity createBullet(Entity entity, GameData gameData);
 
+
 }

@@ -10,10 +10,14 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.util.SPIAsteroidsLocator;
 
+import java.util.Collection;
+import java.util.ServiceLoader;
+
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.*;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
+import static java.util.stream.Collectors.toList;
 
 /**
  *
@@ -34,7 +38,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
             movingPart.setUp(gameData.getKeys().isDown(UP));
 
             if (gameData.getKeys().isDown(SPACE)){
-                for (IBulletSPI bullet : SPIAsteroidsLocator.locate(IBulletSPI.class)){
+                for (IBulletSPI bullet : getBulletSPI()){
                     bullet.createBullet(player, gameData);
                 }
             }
@@ -69,6 +73,10 @@ public class PlayerControlSystem implements IEntityProcessingService {
 
         entity.setShapeX(shapex);
         entity.setShapeY(shapey);
+    }
+
+    private Collection<? extends IBulletSPI> getBulletSPI() {
+        return ServiceLoader.load(IBulletSPI.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 
 }

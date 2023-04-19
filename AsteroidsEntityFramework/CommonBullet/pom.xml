@@ -8,8 +8,6 @@
         <artifactId>AsteroidsEntityFramework</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
-    <groupId>dk.sdu.mmmi.cbse.commonbulletsystem</groupId>
     <artifactId>CommonBullet</artifactId>
 
     <properties>
@@ -18,6 +16,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>dk.sdu.mmmi.cbse</groupId>
             <artifactId>Common</artifactId>

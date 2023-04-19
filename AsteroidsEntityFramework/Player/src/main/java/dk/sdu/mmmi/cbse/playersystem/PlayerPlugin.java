@@ -32,12 +32,13 @@ public class PlayerPlugin implements IGamePluginService {
         float x = gameData.getDisplayWidth() / 2;
         float y = gameData.getDisplayHeight() / 2;
         float radians = 3.1415f / 2;
+        int life = 3;
         
         Entity playerShip = new Player();
         playerShip.setRadius(8);
         playerShip.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
         playerShip.add(new PositionPart(x, y, radians));
-        playerShip.add(new LifePart(3));
+        playerShip.add(new LifePart(life));
         
         return playerShip;
     }

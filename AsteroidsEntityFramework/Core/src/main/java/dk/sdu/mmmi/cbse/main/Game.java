@@ -11,22 +11,20 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
-import dk.sdu.mmmi.cbse.common.util.SPIAsteroidsLocator;
 import dk.sdu.mmmi.cbse.managers.GameInputProcessor;
-
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.ServiceLoader;
+import static java.util.stream.Collectors.toList;
 
-public class Game
-        implements ApplicationListener {
+public class Game implements ApplicationListener {
 
     private static OrthographicCamera cam;
     private ShapeRenderer sr;
 
     private final GameData gameData = new GameData();
     private List<IEntityProcessingService> entityProcessors = new ArrayList<>();
-    private List<IGamePluginService> entityPlugins = new ArrayList<>();
-
     private List<IPostEntityProcessingService> postEntityProcessors = new ArrayList<>();
     private World world = new World();
 
@@ -46,35 +44,10 @@ public class Game
                 new GameInputProcessor(gameData)
         );
 
-        /*
-        Code for DataOriented Game Development
-        IGamePluginService playerPlugin = new PlayerPlugin();
-        IGamePluginService enemyPlugin = new EnemyPlugin();
-        IGamePluginService asteroidPlugin = new AsteroidPlugin();
-
-        IEntityProcessingService playerProcess = new PlayerControlSystem();
-        entityPlugins.add(playerPlugin);
-        entityProcessors.add(playerProcess);
-        //Enemy
-        IEntityProcessingService enemyProcess = new EnemyControlSystem();
-        entityPlugins.add(enemyPlugin);
-        entityProcessors.add(enemyProcess);
-        //Asteroid
-        IEntityProcessingService asteroidProcess = new AsteroidControlSystem();
-        entityPlugins.add(asteroidPlugin);
-        entityProcessors.add(asteroidProcess);
-
         // Lookup all Game Plugins using ServiceLoader
-        for (IGamePluginService iGamePlugin : entityPlugins) {
+        for (IGamePluginService iGamePlugin : getPluginServices()) {
             iGamePlugin.start(gameData, world);
         }
-        */
-
-        // Lookup all Game Plugins using ServiceLocator
-        for (IGamePluginService iGamePlugin : SPIAsteroidsLocator.locate(IGamePluginService.class)) {
-            iGamePlugin.start(gameData, world);
-        }
-
     }
 
     @Override
@@ -94,23 +67,13 @@ public class Game
     }
 
     private void update() {
-
-        for (IEntityProcessingService entityProcessingService : SPIAsteroidsLocator.locate(IEntityProcessingService.class)){
-            entityProcessingService.process(gameData, world);
-        }
-
-        for (IPostEntityProcessingService entityPostProcessingService : SPIAsteroidsLocator.locate(IPostEntityProcessingService.class)){
-            entityPostProcessingService.process(gameData, world);
-        }
-
-        /*
-        // Update DataOriented game design
-        for (IEntityProcessingService entityProcessorService : entityProcessors) {
+        // Update
+        for (IEntityProcessingService entityProcessorService : getEntityProcessingServices()) {
             entityProcessorService.process(gameData, world);
         }
-
-        for (IPostEntityProcessingService entityPostProcessorService : postEntityProcessors) {
-            entityPostProcessorService.process(gameData, world);}*/
+        for (IPostEntityProcessingService postEntityProcessorService : getPostEntityProcessingServices()) {
+            postEntityProcessorService.process(gameData, world);
+        }
     }
 
     private void draw() {
@@ -124,8 +87,8 @@ public class Game
             float[] shapey = entity.getShapeY();
 
             for (int i = 0, j = shapex.length - 1;
-                    i < shapex.length;
-                    j = i++) {
+                 i < shapex.length;
+                 j = i++) {
 
                 sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
             }
@@ -148,5 +111,17 @@ public class Game
 
     @Override
     public void dispose() {
+    }
+
+    private Collection<? extends IGamePluginService> getPluginServices() {
+        return ServiceLoader.load(IGamePluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    }
+
+    private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
+        return ServiceLoader.load(IEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    }
+
+    private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
+        return ServiceLoader.load(IPostEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 }
