@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.netbeans.modules:org-netbeans-core-startup:RELEASE150">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/netbeans/modules/org-netbeans-core-startup/RELEASE150/org-netbeans-core-startup-RELEASE150.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/netbeans/modules/org-netbeans-core-startup/RELEASE150/org-netbeans-core-startup-RELEASE150-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/netbeans/modules/org-netbeans-core-startup/RELEASE150/org-netbeans-core-startup-RELEASE150-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

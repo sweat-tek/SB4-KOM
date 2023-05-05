@@ -1,0 +1,3 @@
+module Collision {
+    requires Common;
+}
