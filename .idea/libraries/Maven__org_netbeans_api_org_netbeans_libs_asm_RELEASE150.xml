@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.netbeans.api:org-netbeans-libs-asm:RELEASE150">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/netbeans/api/org-netbeans-libs-asm/RELEASE150/org-netbeans-libs-asm-RELEASE150.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/netbeans/api/org-netbeans-libs-asm/RELEASE150/org-netbeans-libs-asm-RELEASE150-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/netbeans/api/org-netbeans-libs-asm/RELEASE150/org-netbeans-libs-asm-RELEASE150-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

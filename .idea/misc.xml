@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/PaxAsteroids/pom.xml" />
+        <option value="$PROJECT_DIR$/AsteroidsJava9/pom.xml" />
+        <option value="$PROJECT_DIR$/AsteroidsLibGDX/pom.xml" />
+        <option value="$PROJECT_DIR$/NBRuntimeExample12/pom.xml" />
+        <option value="$PROJECT_DIR$/SpringAgeCalculator/pom.xml" />
+        <option value="$PROJECT_DIR$/ServiceLoaderExample/pom.xml" />
+        <option value="$PROJECT_DIR$/AsteroidsServiceLoader/pom.xml" />
+        <option value="$PROJECT_DIR$/AsteroidsEntityFramework/pom.xml" />
+        <option value="$PROJECT_DIR$/AsteroidsNetbeansModules/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="openjdk-20" project-jdk-type="JavaSDK" />
+</project>
