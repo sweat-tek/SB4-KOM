@@ -6,6 +6,7 @@ import static dk.sdu.mmmi.cbse.common.data.GameKeys.LEFT;
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.RIGHT;
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.UP;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
@@ -22,6 +23,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
         for (Entity player : world.getEntities(Player.class)) {
             PositionPart positionPart = player.getPart(PositionPart.class);
             MovingPart movingPart = player.getPart(MovingPart.class);
+            LifePart lifePart = player.getPart(LifePart.class);
 
             movingPart.setLeft(gameData.getKeys().isDown(LEFT));
             movingPart.setRight(gameData.getKeys().isDown(RIGHT));
@@ -30,15 +32,16 @@ public class PlayerControlSystem implements IEntityProcessingService {
             
             movingPart.process(gameData, player);
             positionPart.process(gameData, player);
+            lifePart.process(gameData, player);
 
             updateShape(player);
         }
     }
 
-    private void updateShape(Entity entity) {
-        float[] shapex = entity.getShapeX();
-        float[] shapey = entity.getShapeY();
-        PositionPart positionPart = entity.getPart(PositionPart.class);
+    private void updateShape(Entity player) {
+        float[] shapex = player.getShapeX();
+        float[] shapey = player.getShapeY();
+        PositionPart positionPart = player.getPart(PositionPart.class);
         float x = positionPart.getX();
         float y = positionPart.getY();
         float radians = positionPart.getRadians();
@@ -55,8 +58,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
         shapex[3] = (float) (x + Math.cos(radians + 4 * 3.1415f / 5) * 8);
         shapey[3] = (float) (y + Math.sin(radians + 4 * 3.1415f / 5) * 8);
 
-        entity.setShapeX(shapex);
-        entity.setShapeY(shapey);
+        player.setShapeX(shapex);
+        player.setShapeY(shapey);
     }
 
 }
