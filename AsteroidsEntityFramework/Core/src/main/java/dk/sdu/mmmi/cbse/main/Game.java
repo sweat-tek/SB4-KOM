@@ -5,11 +5,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import dk.sdu.mmmi.cbse.asteroidsystem.AsteroidPlugin;
+import dk.sdu.mmmi.cbse.asteroidsystem.AsteroidProcess;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.enemysystem.EnemyPlugin;
+import dk.sdu.mmmi.cbse.enemysystem.EnemyProcess;
 import dk.sdu.mmmi.cbse.managers.GameInputProcessor;
 import dk.sdu.mmmi.cbse.playersystem.PlayerControlSystem;
 import dk.sdu.mmmi.cbse.playersystem.PlayerPlugin;
@@ -44,10 +48,20 @@ public class Game
         );
 
         IGamePluginService playerPlugin = new PlayerPlugin();
-
         IEntityProcessingService playerProcess = new PlayerControlSystem();
         entityPlugins.add(playerPlugin);
         entityProcessors.add(playerProcess);
+
+        IGamePluginService enemyPlugin = new EnemyPlugin();
+        IEntityProcessingService enemyProcess = new EnemyProcess();
+        entityPlugins.add(enemyPlugin);
+        entityProcessors.add(enemyProcess);
+
+        IGamePluginService asteroidPlugin = new AsteroidPlugin();
+        IEntityProcessingService asteroidProcess = new AsteroidProcess();
+        entityPlugins.add(asteroidPlugin);
+        entityProcessors.add(asteroidProcess);
+
         // Lookup all Game Plugins using ServiceLoader
         for (IGamePluginService iGamePlugin : entityPlugins) {
             iGamePlugin.start(gameData, world);

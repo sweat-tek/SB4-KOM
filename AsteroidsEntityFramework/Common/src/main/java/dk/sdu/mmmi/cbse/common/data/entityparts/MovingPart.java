@@ -61,6 +61,11 @@ public class MovingPart
         this.up = up;
     }
 
+    public void setSpeed(float speed) {
+        this.acceleration = speed;
+        this.maxSpeed = speed;
+    }
+
     @Override
     public void process(GameData gameData, Entity entity) {
         PositionPart positionPart = entity.getPart(PositionPart.class);
@@ -117,5 +122,4 @@ public class MovingPart
 
         positionPart.setRadians(radians);
     }
-
 }
