@@ -1,2 +1,0 @@
-Manifest-Version: 1.0
-OpenIDE-Module-Install: dk/sdu/mmmi/cbse/core/main/Installer.class

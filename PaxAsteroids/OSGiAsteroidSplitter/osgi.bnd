@@ -1,4 +1,0 @@
-Bundle-SymbolicName: OSGiAsteroidSplitter
-Bundle-ActivationPolicy: lazy
-Service-Component: META-INF/asteroidsplitter.xml
-
