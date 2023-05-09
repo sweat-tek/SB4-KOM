@@ -1,3 +1,0 @@
-Manifest-Version: 1.0
-OpenIDE-Module-Localizing-Bundle: dk/sdu/cbse/nbruntimeexample12/branding/Bundle.properties
-AutoUpdate-Essential-Module: true

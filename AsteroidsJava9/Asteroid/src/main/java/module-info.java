@@ -1,3 +1,0 @@
-module Asteroid {
-    requires Common;
-}

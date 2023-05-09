@@ -1,2 +1,0 @@
-Manifest-Version: 1.0
-OpenIDE-Module-Localizing-Bundle: dk/sdu/cbse/helloworld/Bundle.properties
