@@ -3,6 +3,7 @@ package dk.sdu.mmmi.cbse.asteroidsystem;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
@@ -17,20 +18,16 @@ public class AsteroidPlugin implements IGamePluginService {
     }
 
     private Entity createAsteroid(GameData gameData) {
+        Entity asteroid = new Asteroid();
+        float radians = (float) Math.random() * 2 * 3.1415f;
+        float speed = (float) Math.random() * 10f + 20f;
 
-        float deacceleration = 10;
-        float acceleration = 25;
-        float maxSpeed = 100;
-        float rotationSpeed = 5;
-        float x = (float) (gameData.getDisplayWidth() / Math.random() * 1);
-        float y = (float) (gameData.getDisplayHeight() / Math.random() * 1);
-        float radians = 3.1415f / 2;
+        asteroid.setRadius(20);
+        asteroid.add(new MovingPart(0, speed, speed, 0));
+        asteroid.add(new PositionPart(30, 30, radians));
+        asteroid.add(new LifePart(3));
 
-        Entity newAsteroid = new Asteroid();
-        newAsteroid.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
-        newAsteroid.add(new PositionPart(x, y, radians));
-
-        return newAsteroid;
+        return asteroid;
     }
 
 
