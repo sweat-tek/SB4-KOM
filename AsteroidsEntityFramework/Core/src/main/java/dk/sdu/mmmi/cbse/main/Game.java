@@ -7,11 +7,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import dk.sdu.mmmi.cbse.asteroidsystem.AsteroidPlugin;
 import dk.sdu.mmmi.cbse.asteroidsystem.AsteroidProcess;
+import dk.sdu.mmmi.cbse.collisionsystem.CollisionDetection;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import dk.sdu.mmmi.cbse.enemysystem.EnemyPlugin;
 import dk.sdu.mmmi.cbse.enemysystem.EnemyProcess;
 import dk.sdu.mmmi.cbse.managers.GameInputProcessor;
@@ -28,6 +30,7 @@ public class Game
 
     private final GameData gameData = new GameData();
     private List<IEntityProcessingService> entityProcessors = new ArrayList<>();
+    private List<IPostEntityProcessingService> postEntityProcessors = new ArrayList<>();
     private List<IGamePluginService> entityPlugins = new ArrayList<>();
     private World world = new World();
 
@@ -62,6 +65,9 @@ public class Game
         entityPlugins.add(asteroidPlugin);
         entityProcessors.add(asteroidProcess);
 
+        IPostEntityProcessingService collisionDetection = new CollisionDetection();
+        postEntityProcessors.add(collisionDetection);
+
         // Lookup all Game Plugins using ServiceLoader
         for (IGamePluginService iGamePlugin : entityPlugins) {
             iGamePlugin.start(gameData, world);
@@ -88,6 +94,10 @@ public class Game
         // Update
         for (IEntityProcessingService entityProcessorService : entityProcessors) {
             entityProcessorService.process(gameData, world);
+        }
+
+        for (IPostEntityProcessingService postEntityProcessingService : postEntityProcessors) {
+            postEntityProcessingService.process(gameData, world);
         }
     }
 
