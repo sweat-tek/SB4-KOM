@@ -1,11 +1,14 @@
 package dk.sdu.mmmi.cbse.enemysystem;
 
+import dk.sdu.mmmi.cbse.common.bullet.BulletSPI;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+import dk.sdu.mmmi.cbse.common.util.SPILocator;
 
 public class EnemyProcess implements IEntityProcessingService {
     @Override
@@ -13,11 +16,20 @@ public class EnemyProcess implements IEntityProcessingService {
         for (Entity enemy : world.getEntities(Enemy.class)) {
             PositionPart positionPart = enemy.getPart(PositionPart.class);
             MovingPart movingPart = enemy.getPart(MovingPart.class);
+            LifePart lifePart = enemy.getPart(LifePart.class);
 
-            // TODO: Enemy controls
+            double random = Math.random();
+            movingPart.setLeft(random < 0.2);
+            movingPart.setRight(random > 0.3 && random < 0.5);
+            movingPart.setUp(random > 0.7 && random < 0.9);
+
+            if (random > 0.98) {
+                // TODO: Implement shooting
+            }
 
             movingPart.process(gameData, enemy);
             positionPart.process(gameData, enemy);
+            lifePart.process(gameData, enemy);
 
             updateShape(enemy);
         }

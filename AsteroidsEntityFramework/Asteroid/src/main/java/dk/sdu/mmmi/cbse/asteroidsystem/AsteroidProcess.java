@@ -1,5 +1,7 @@
 package dk.sdu.mmmi.cbse.asteroidsystem;
 
+import dk.sdu.mmmi.cbse.common.asteroid.Asteroid;
+import dk.sdu.mmmi.cbse.common.asteroid.IAsteroidSplitter;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -9,6 +11,9 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 
 public class AsteroidProcess implements IEntityProcessingService {
+
+    private IAsteroidSplitter asteroidSplitter = new AsteroidSplitterImpl();
+
     @Override
     public void process(GameData gameData, World world) {
         for (Entity asteroid : world.getEntities(Asteroid.class)) {
@@ -30,6 +35,11 @@ public class AsteroidProcess implements IEntityProcessingService {
 
             movingPart.process(gameData, asteroid);
             positionPart.process(gameData, asteroid);
+
+            // Split event
+            if (lifePart.isHit()) {
+                this.asteroidSplitter.createSplitAsteroid(asteroid, world);
+            }
 
             setShape(asteroid, numPoints);
         }

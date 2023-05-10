@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import dk.sdu.mmmi.cbse.asteroidsystem.AsteroidPlugin;
 import dk.sdu.mmmi.cbse.asteroidsystem.AsteroidProcess;
+import dk.sdu.mmmi.cbse.bulletsystem.BulletPlugin;
+import dk.sdu.mmmi.cbse.bulletsystem.BulletProcess;
 import dk.sdu.mmmi.cbse.collisionsystem.CollisionDetection;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
@@ -64,6 +66,11 @@ public class Game
         IEntityProcessingService asteroidProcess = new AsteroidProcess();
         entityPlugins.add(asteroidPlugin);
         entityProcessors.add(asteroidProcess);
+
+        IGamePluginService bulletPlugin = new BulletPlugin();
+        IEntityProcessingService bulletProcess = new BulletProcess();
+        entityPlugins.add(bulletPlugin);
+        entityProcessors.add(bulletProcess);
 
         IPostEntityProcessingService collisionDetection = new CollisionDetection();
         postEntityProcessors.add(collisionDetection);
