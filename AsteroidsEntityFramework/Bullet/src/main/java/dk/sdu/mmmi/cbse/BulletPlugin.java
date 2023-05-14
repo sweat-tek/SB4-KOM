@@ -6,43 +6,31 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.services.IBulletPluginService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 
-public class BulletPlugin implements IGamePluginService {
-
-    // Gør Bullet funktionel på Enemy også.
-    // Følg video efter help.Albrech
-    // Tilføj TimerPart
-    // Benyt evt. blaster
-
-    private Entity bullet;
-    private Entity blaster;
-
+public class BulletPlugin implements IBulletPluginService {
 
     public BulletPlugin() {
     }
 
-    @Override
-    public void start(GameData gameData, World world) {
 
-        bullet = createBullet(gameData);
-        world.addEntity(bullet);
 
-    }
+    private Entity createBullet(Entity entity) {
 
-    private Entity createBullet(GameData gameData) {
+        PositionPart positionPart = entity.getPart(PositionPart.class);
+
         float deceleration = 0;
-        float acceleration = 200;
-        float maxSpeed = 20;
+        float acceleration = 2000;
+        float maxSpeed = 200;
         float rotationSpeed = 30;
-        float x = gameData.getDisplayWidth() / 4;
-        float y = gameData.getDisplayHeight() / 4;
-        float radians = 5;
+        float x = positionPart.getX();
+        float y = positionPart.getY();
+        float radians = positionPart.getRadians();
 
         Entity bulletPlayer = new Bullet();
+        // Ændre senere til at lave bullets størrelse om. Kopier samme shape som player og giv anden farve + størrelse.
 
-        bullet.setShapeX(new float[2]);
-        bullet.setShapeY(new float[2]);
         bulletPlayer.add(new MovingPart(deceleration,acceleration,maxSpeed,rotationSpeed));
         bulletPlayer.add(new PositionPart(x,y,radians));
         bulletPlayer.add(new LifePart(1,1000));
@@ -50,11 +38,16 @@ public class BulletPlugin implements IGamePluginService {
         return bulletPlayer;
     }
 
-    @Override
-    public void stop(GameData gameData, World world) {
-        world.removeEntity(bullet);
 
+    @Override
+    public Entity start(Entity entity, GameData gameData) {
+        entity = createBullet(entity);
+        return entity;
     }
 
+    @Override
+    public Entity stop() {
+        return null;
+    }
 
 }

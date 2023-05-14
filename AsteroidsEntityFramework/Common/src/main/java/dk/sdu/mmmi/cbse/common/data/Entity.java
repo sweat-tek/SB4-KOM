@@ -16,6 +16,8 @@ public class Entity implements Serializable {
     private Map<Class, EntityPart> parts;
 
     private int life;
+
+
     
     public Entity() {
         parts = new ConcurrentHashMap<>();

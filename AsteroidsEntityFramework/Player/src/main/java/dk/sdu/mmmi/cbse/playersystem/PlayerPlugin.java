@@ -1,5 +1,6 @@
 package dk.sdu.mmmi.cbse.playersystem;
 
+import dk.sdu.mmmi.cbse.BulletPlugin;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -21,6 +22,7 @@ public class PlayerPlugin implements IGamePluginService {
         // Add entities to the world
         player = createPlayerShip(gameData);
         world.addEntity(player);
+
     }
 
     private Entity createPlayerShip(GameData gameData) {
@@ -41,6 +43,8 @@ public class PlayerPlugin implements IGamePluginService {
         playerShip.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
         playerShip.add(new PositionPart(x, y, radians));
         playerShip.add(new LifePart(1,1000));
+
+
         
         return playerShip;
     }

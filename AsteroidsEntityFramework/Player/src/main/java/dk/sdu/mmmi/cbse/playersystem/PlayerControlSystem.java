@@ -1,15 +1,18 @@
 package dk.sdu.mmmi.cbse.playersystem;
 
+import dk.sdu.mmmi.cbse.BulletPlugin;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.LEFT;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.RIGHT;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.UP;
+
+import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.services.IBulletPluginService;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+
+import static dk.sdu.mmmi.cbse.common.data.GameKeys.*;
 
 /**
  *
@@ -29,18 +32,28 @@ public class PlayerControlSystem implements IEntityProcessingService {
             movingPart.setRight(gameData.getKeys().isDown(RIGHT));
             movingPart.setUp(gameData.getKeys().isDown(UP));
 
+            if (gameData.getKeys().isDown(SPACE)) {
+                BulletPlugin bulletPlugin = new BulletPlugin();
+                world.addEntity(bulletPlugin.start(player,gameData));
+
+            }
+
+
             movingPart.process(gameData, player);
             positionPart.process(gameData, player);
             lifePart.process(gameData, player);
 
+
+          //  bulletPart.start(player,gameData);
             updateShape(player);
+
         }
     }
 
-    private void updateShape(Entity player) {
-        float[] shapex = player.getShapeX();
-        float[] shapey = player.getShapeY();
-        PositionPart positionPart = player.getPart(PositionPart.class);
+    private void updateShape(Entity entity) {
+        float[] shapex = entity.getShapeX();
+        float[] shapey = entity.getShapeY();
+        PositionPart positionPart = entity.getPart(PositionPart.class);
         float x = positionPart.getX();
         float y = positionPart.getY();
         float radians = positionPart.getRadians();
@@ -57,8 +70,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
         shapex[3] = (float) (x + Math.cos(radians + 4 * 3.1415f / 5) * 8);
         shapey[3] = (float) (y + Math.sin(radians + 4 * 3.1415f / 5) * 8);
 
-        player.setShapeX(shapex);
-        player.setShapeY(shapey);
+        entity.setShapeX(shapex);
+        entity.setShapeY(shapey);
     }
 
 }

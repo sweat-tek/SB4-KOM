@@ -14,6 +14,7 @@ import dk.sdu.mmmi.cbse.asteroid.AsteroidPlugin;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.services.IBulletPluginService;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
@@ -64,11 +65,8 @@ public class Game implements ApplicationListener {
         IPostEntityProcessingService collisionProcess = new CollisionSystem();
 
         // bullet instantiation here
-        IGamePluginService bulletPlugin = new BulletPlugin();
+
         IEntityProcessingService bulletProcess = new BulletControlSystem();
-
-
-
 
 
         // Adding the entities to the game
@@ -81,20 +79,12 @@ public class Game implements ApplicationListener {
         entityProcessors.add(playerProcess);
         entityProcessors.add(enemyProcess);
         entityProcessors.add(asteroidProcess);
-       // entityProcessors.add(bulletProcess);
+        entityProcessors.add(bulletProcess);
 
         // Adding the processor of collision to the game
         entityPostProcessorServiceList.add(collisionProcess);
 
-
-
-
-
         // bullet instance here
-
-
-
-
 
         // Lookup all Game Plugins using ServiceLoader
         for (IGamePluginService iGamePlugin : entityPlugins) {
@@ -128,6 +118,8 @@ public class Game implements ApplicationListener {
         for (IPostEntityProcessingService entityPostProcessorService : entityPostProcessorServiceList) {
             entityPostProcessorService.process(gameData, world);
         }
+
+
 
 
 
