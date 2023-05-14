@@ -18,13 +18,13 @@ public class LifePart implements EntityPart {
     private boolean isHit;
     private float expiration;
 
-    private boolean alive;
+    private boolean isAlive;
 
     public LifePart(int life, float expiration) {
         this.life = life;
         this.expiration = expiration;
         this.isHit = false;
-        this.alive = true;
+        this.isAlive = true;
     }
 
     public int getLife() {
@@ -56,7 +56,11 @@ public class LifePart implements EntityPart {
     }
 
     public boolean isAlive() {
-        return this.alive;
+        return this.isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.isAlive = alive;
     }
 
     @Override
@@ -67,9 +71,7 @@ public class LifePart implements EntityPart {
             this.isHit = false;
         }
         if (lifePart.getLife()<=0) {
-            alive = false;
-
+            isAlive = false;
         }
-        
     }
 }

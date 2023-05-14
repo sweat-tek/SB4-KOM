@@ -28,6 +28,11 @@ public class AsteroidControlSystem implements IEntityProcessingService {
             MovingPart movingPart = asteroid.getPart(MovingPart.class);
             LifePart lifePart = asteroid.getPart(LifePart.class);
 
+            if (lifePart.getLife()<= 0) {
+                lifePart.setAlive(false);
+                world.removeEntity(asteroid);
+            }
+
 
 
             float speed = (float) Math.random() * 10f + 40f;
