@@ -19,8 +19,7 @@ public class BulletPlugin implements IGamePluginService {
     private Entity blaster;
 
 
-    public BulletPlugin(Entity blaster) {
-
+    public BulletPlugin() {
     }
 
     @Override
@@ -42,6 +41,8 @@ public class BulletPlugin implements IGamePluginService {
 
         Entity bulletPlayer = new Bullet();
 
+        bullet.setShapeX(new float[2]);
+        bullet.setShapeY(new float[2]);
         bulletPlayer.add(new MovingPart(deceleration,acceleration,maxSpeed,rotationSpeed));
         bulletPlayer.add(new PositionPart(x,y,radians));
         bulletPlayer.add(new LifePart(1,1000));

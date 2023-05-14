@@ -5,6 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
+import dk.sdu.mmmi.cbse.BulletControlSystem;
+import dk.sdu.mmmi.cbse.BulletPlugin;
 import dk.sdu.mmmi.cbse.CollisionSystem;
 import dk.sdu.mmmi.cbse.asteroid.AsteroidControlSystem;
 import dk.sdu.mmmi.cbse.asteroid.AsteroidPlugin;
@@ -26,7 +29,6 @@ public class Game implements ApplicationListener {
 
     private static OrthographicCamera cam;
     private ShapeRenderer sr;
-
     private final GameData gameData = new GameData();
     private List<IEntityProcessingService> entityProcessors = new ArrayList<>();
     private List<IPostEntityProcessingService> entityPostProcessorServiceList = new ArrayList<>();
@@ -49,7 +51,7 @@ public class Game implements ApplicationListener {
                 new GameInputProcessor(gameData)
         );
 
-        // APPLY YOURSELF AND MAKE THIS MANAGEABLE AND STRUCTURED
+
         IGamePluginService playerPlugin = new PlayerPlugin();
         IEntityProcessingService playerProcess = new PlayerControlSystem();
 
@@ -61,13 +63,37 @@ public class Game implements ApplicationListener {
 
         IPostEntityProcessingService collisionProcess = new CollisionSystem();
 
+        // bullet instantiation here
+        IGamePluginService bulletPlugin = new BulletPlugin();
+        IEntityProcessingService bulletProcess = new BulletControlSystem();
+
+
+
+
+
+        // Adding the entities to the game
         entityPlugins.add(playerPlugin);
-        entityProcessors.add(playerProcess);
+       // entityPlugins.add(bulletPlugin);
         entityPlugins.add(enemyPlugin);
-        entityProcessors.add(enemyProcess);
         entityPlugins.add(asteroidPlugin);
+
+        // Adding the controlsystems to the game
+        entityProcessors.add(playerProcess);
+        entityProcessors.add(enemyProcess);
         entityProcessors.add(asteroidProcess);
+       // entityProcessors.add(bulletProcess);
+
+        // Adding the processor of collision to the game
         entityPostProcessorServiceList.add(collisionProcess);
+
+
+
+
+
+        // bullet instance here
+
+
+
 
 
         // Lookup all Game Plugins using ServiceLoader
