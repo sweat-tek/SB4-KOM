@@ -59,7 +59,7 @@ public class Game implements ApplicationListener {
         IGamePluginService enemyPlugin = new EnemyPlugin();
         IEntityProcessingService enemyProcess = new EnemyControlSystem();
 
-        IGamePluginService asteroidPlugin = new AsteroidPlugin();
+        IGamePluginService asteroidPlugin = new AsteroidPlugin(3);
         IEntityProcessingService asteroidProcess = new AsteroidControlSystem();
 
         IPostEntityProcessingService collisionProcess = new CollisionSystem();

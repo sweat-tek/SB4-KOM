@@ -19,7 +19,6 @@ import static dk.sdu.mmmi.cbse.common.data.GameKeys.*;
  * @author jcs
  */
 public class PlayerControlSystem implements IEntityProcessingService {
-
     @Override
     public void process(GameData gameData, World world) {
 
@@ -38,7 +37,6 @@ public class PlayerControlSystem implements IEntityProcessingService {
 
             }
 
-
             movingPart.process(gameData, player);
             positionPart.process(gameData, player);
             lifePart.process(gameData, player);
@@ -49,7 +47,6 @@ public class PlayerControlSystem implements IEntityProcessingService {
 
         }
     }
-
     private void updateShape(Entity entity) {
         float[] shapex = entity.getShapeX();
         float[] shapey = entity.getShapeY();
@@ -73,5 +70,4 @@ public class PlayerControlSystem implements IEntityProcessingService {
         entity.setShapeX(shapex);
         entity.setShapeY(shapey);
     }
-
 }
