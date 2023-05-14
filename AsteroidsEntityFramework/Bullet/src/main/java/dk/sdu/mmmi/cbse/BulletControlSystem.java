@@ -14,6 +14,7 @@ public class BulletControlSystem implements IEntityProcessingService {
     public void process(GameData gameData, World world) {
 
         for (Entity bullet : world.getEntities(Bullet.class)) {
+
             PositionPart positionPart = bullet.getPart(PositionPart.class);
             MovingPart movingPart = bullet.getPart(MovingPart.class);
             LifePart lifePart = bullet.getPart(LifePart.class);
@@ -31,10 +32,10 @@ public class BulletControlSystem implements IEntityProcessingService {
         }
     }
 
-    private void updateShape(Entity bullet) {
-        float[] shapeX = bullet.getShapeX();
-        float[] shapeY = bullet.getShapeY();
-        PositionPart positionPart = bullet.getPart(PositionPart.class);
+    private void updateShape(Entity entity) {
+        float[] shapeX = entity.getShapeX();
+        float[] shapeY = entity.getShapeY();
+        PositionPart positionPart = entity.getPart(PositionPart.class);
         float x = positionPart.getX();
         float y = positionPart.getY();
         float radians = positionPart.getRadians();
@@ -50,6 +51,10 @@ public class BulletControlSystem implements IEntityProcessingService {
 
         shapeX[3] = (float) (x + Math.cos(radians) * -1);
         shapeY[3] = (float) (y + Math.sin(radians) * -1);
+
+        entity.setShapeX(shapeX);
+        entity.setShapeY(shapeY);
+
 
     }
 }

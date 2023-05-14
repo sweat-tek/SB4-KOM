@@ -30,7 +30,7 @@ public class AsteroidPlugin implements IGamePluginService {
             float speed = (float) Math.random() * 10f + 40f;
             float radians = 3.1415f / 2 + (float) Math.random();
             asteroid.setRadius(15);
-            asteroid.add(new MovingPart(0, speed, speed, 0));
+            asteroid.add(new MovingPart(0, speed, speed, 1));
             asteroid.add(new PositionPart(x, y, radians));
             asteroid.add(new LifePart(6, 69));
             asteroid.add(new SplitterPart());
