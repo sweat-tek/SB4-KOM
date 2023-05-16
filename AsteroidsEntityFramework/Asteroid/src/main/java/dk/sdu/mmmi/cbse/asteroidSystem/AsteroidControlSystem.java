@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.cbse.asteroid;
+package dk.sdu.mmmi.cbse.asteroidSystem;
 
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
@@ -29,7 +29,7 @@ public class AsteroidControlSystem implements IEntityProcessingService {
             LifePart lifePart = asteroid.getPart(LifePart.class);
 
             if (lifePart.getLife()<= 0) {
-                lifePart.setAlive(false);
+                lifePart.isEliminated();
                 world.removeEntity(asteroid);
             }
 

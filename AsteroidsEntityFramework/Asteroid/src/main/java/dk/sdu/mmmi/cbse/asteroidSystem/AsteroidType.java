@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.cbse.asteroid;
+package dk.sdu.mmmi.cbse.asteroidSystem;
 
 public enum AsteroidType {
 

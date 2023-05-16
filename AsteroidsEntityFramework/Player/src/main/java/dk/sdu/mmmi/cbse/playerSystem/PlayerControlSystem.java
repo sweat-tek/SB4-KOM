@@ -1,15 +1,13 @@
-package dk.sdu.mmmi.cbse.playersystem;
+package dk.sdu.mmmi.cbse.playerSystem;
 
-import dk.sdu.mmmi.cbse.BulletPlugin;
+import dk.sdu.mmmi.cbse.bulletSystem.BulletPlugin;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 
-import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
-import dk.sdu.mmmi.cbse.common.services.IBulletPluginService;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.*;

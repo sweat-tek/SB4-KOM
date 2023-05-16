@@ -18,13 +18,13 @@ public class LifePart implements EntityPart {
     private boolean isHit;
     private float expiration;
 
-    private boolean isAlive;
+    private boolean eliminated;
 
     public LifePart(int life, float expiration) {
         this.life = life;
         this.expiration = expiration;
         this.isHit = false;
-        this.isAlive = true;
+        this.eliminated = false;
     }
 
     public int getLife() {
@@ -55,12 +55,12 @@ public class LifePart implements EntityPart {
         this.expiration -= delta;
     }
 
-    public boolean isAlive() {
-        return this.isAlive;
+    public boolean isEliminated() {
+        return this.eliminated;
     }
 
-    public void setAlive(boolean alive) {
-        this.isAlive = alive;
+    public void setAlive(boolean eliminated) {
+        this.eliminated = eliminated;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class LifePart implements EntityPart {
             this.isHit = false;
         }
         if (lifePart.getLife()<=0) {
-            isAlive = false;
+            eliminated = true;
         }
     }
 }
