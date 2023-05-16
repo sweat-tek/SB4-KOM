@@ -8,13 +8,23 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
-
 import java.util.Random;
 
-public class AsteroidPlugin implements IGamePluginService {
+
+import static dk.sdu.mmmi.cbse.asteroid.AsteroidType.SMALL;
+import static dk.sdu.mmmi.cbse.asteroid.AsteroidType.MEDIUM;
+import static dk.sdu.mmmi.cbse.asteroid.AsteroidType.LARGE;
+
+public class AsteroidPlugin extends Asteroid implements IGamePluginService {
         private Entity asteroid;
-        private int life;
+        public int life;
         private float deacceleration, acceleration, maxSpeed, rotationSpeed;
+
+
+        private int numOfPoints;
+        private float[] distance;
+
+        AsteroidType asteroidType;
 
         Random randomNumber = new Random();
 
@@ -24,7 +34,28 @@ public class AsteroidPlugin implements IGamePluginService {
             this.acceleration = 1000;
             this.maxSpeed = 5000;
             this.rotationSpeed = 1;
+            this.numOfPoints = 6;
+        }
 
+        // Fortsæt med logik, evaluer på "life"
+        // Hvis life == 2, create medium asteroids osv.
+        // overvej hvordan du vil process dette
+        // se om du kan få type og splitter ind i Plugin og/eller control system
+        public Entity InitializeAsteroid (GameData gameData) {
+            float x = gameData.getDisplayWidth() / 2 + 100;
+            float y = gameData.getDisplayHeight() / 2 +150;
+            float radians = 3.1415f / 2 + (float) Math.random();
+            float initialSpeed = 50;
+
+            Entity asteroid = new Asteroid(LARGE);
+            asteroid.setRadius(15);
+            asteroid.setShapeX(new float[this.numOfPoints]);
+            asteroid.setShapeY(new float[this.numOfPoints]);
+            asteroid.add(new LifePart(3,10));
+            asteroid.add(new MovingPart(deacceleration,acceleration,maxSpeed,rotationSpeed));
+            asteroid.add(new PositionPart(x,y,radians));
+
+            return asteroid;
         }
         public AsteroidPlugin() {
             this(3);
@@ -59,6 +90,8 @@ public class AsteroidPlugin implements IGamePluginService {
             asteroid.add(new SplitterPart());
 
            // this.buildAsteroid(gameData, asteroid, x, y, radians);
+
+
 
             return asteroid;
         }
@@ -95,11 +128,11 @@ public class AsteroidPlugin implements IGamePluginService {
             createSmallAsteroid(50,50);
     }
 
-    private Asteroid createSmallAsteroid(float x, float y) {
+    private Asteroid createSmallAsteroid(float x, float y ) {
         float speed = (float) Math.random() * 10f + 5f;
         float radians = 3.1415f / 2 + (float) Math.random();
 
-        Entity asteroid = new Asteroid(AsteroidType.SMALL);
+        Entity asteroid = new Asteroid(SMALL);
 
         asteroid.add(new MovingPart(0,speed,speed,0));
         asteroid.add(new PositionPart(x + randomNumber.nextInt(50),
@@ -107,6 +140,7 @@ public class AsteroidPlugin implements IGamePluginService {
         asteroid.add(new LifePart(2,69));
         asteroid.add(new SplitterPart());
         asteroid.setRadius(15);
+
 
         return (Asteroid) asteroid;
     }

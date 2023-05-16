@@ -7,9 +7,6 @@ public enum AsteroidType {
     MEDIUM("MEDIUM"),
     SMALL("SMALL");
 
-
-
-
     private String size;
 
     private AsteroidType(String size) {
