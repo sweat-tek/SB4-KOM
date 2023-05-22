@@ -15,12 +15,16 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 public class LifePart implements EntityPart {
 
     private int life;
-    private boolean isHit = false;
+    private boolean isHit;
     private float expiration;
+
+    private boolean eliminated;
 
     public LifePart(int life, float expiration) {
         this.life = life;
         this.expiration = expiration;
+        this.isHit = false;
+        this.eliminated = false;
     }
 
     public int getLife() {
@@ -32,7 +36,7 @@ public class LifePart implements EntityPart {
     }
 
     public boolean isIsHit() {
-        return isHit;
+        return this.isHit;
     }
 
     public void setIsHit(boolean isHit) {
@@ -50,9 +54,24 @@ public class LifePart implements EntityPart {
     public void reduceExpiration(float delta){
         this.expiration -= delta;
     }
-    
+
+    public boolean isEliminated() {
+        return this.eliminated;
+    }
+
+    public void setAlive(boolean eliminated) {
+        this.eliminated = eliminated;
+    }
+
     @Override
     public void process(GameData gameData, Entity entity) {
-        
+        LifePart lifePart = new LifePart(3,1000);
+        if (lifePart.isHit) {
+            this.life = -1;
+            this.isHit = false;
+        }
+        if (lifePart.getLife()<=0) {
+            eliminated = true;
+        }
     }
 }
