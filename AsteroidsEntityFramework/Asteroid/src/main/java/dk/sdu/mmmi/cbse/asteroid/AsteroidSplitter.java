@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.cbse.asteroidSystem;
+package dk.sdu.mmmi.cbse.asteroid;
 
 import dk.sdu.mmmi.cbse.common.data.entityparts.SplitterPart;
 import dk.sdu.mmmi.cbse.common.data.Entity;

@@ -1,6 +1,5 @@
-package dk.sdu.mmmi.cbse.asteroidSystem;
+package dk.sdu.mmmi.cbse.asteroid;
 
-import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.Entity;
@@ -26,17 +25,9 @@ public class AsteroidControlSystem implements IEntityProcessingService {
         for (Entity asteroid : world.getEntities(Asteroid.class)) {
             PositionPart positionPart = asteroid.getPart(PositionPart.class);
             MovingPart movingPart = asteroid.getPart(MovingPart.class);
-            LifePart lifePart = asteroid.getPart(LifePart.class);
-
-            if (lifePart.getLife()<= 0) {
-                lifePart.isEliminated();
-                world.removeEntity(asteroid);
-            }
-
-
+            //LifePart lifePart = asteroid.getPart(LifePart.class);
 
             float speed = (float) Math.random() * 10f + 40f;
-
             if (randomNumber.nextInt() < 8) {
                 movingPart.setMaxSpeed(speed);
                 movingPart.setUp(true);
@@ -45,13 +36,9 @@ public class AsteroidControlSystem implements IEntityProcessingService {
             }
             movingPart.process(gameData,asteroid);
             positionPart.process(gameData,asteroid);
-            lifePart.process(gameData,asteroid);
-
-
+            updateShape(asteroid);
             movingPart.setRight(false);
             movingPart.setUp(false);
-
-            updateShape(asteroid);
 
         }
     }

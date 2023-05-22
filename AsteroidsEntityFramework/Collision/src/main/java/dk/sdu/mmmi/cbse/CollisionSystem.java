@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.cbse.collisionSystem;
+package dk.sdu.mmmi.cbse;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
@@ -9,7 +9,7 @@ import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 
 public class CollisionSystem implements IPostEntityProcessingService {
 
-
+    // UDKOMMENTER FØRST EFTER DU HAR SKREVET COMMENTS OM DERES INDHOLD
     // Gamedata og world processes the two for-loops and adds the entities to the game
     @Override
     public void process(GameData gameData, World world) {
@@ -49,13 +49,12 @@ public class CollisionSystem implements IPostEntityProcessingService {
     }
 
     public Boolean Collides(Entity entity, Entity entity2) {
-        // Two PositionPart-objects will be used to define the
+        // Two entity-objects will
         PositionPart entMov = entity.getPart(PositionPart.class);
         PositionPart entMov2 = entity2.getPart(PositionPart.class);
         float dx = (float) entMov.getX() - (float) entMov2.getX();
         float dy = (float) entMov.getY() - (float) entMov2.getY();
         float distance = (float) Math.sqrt(dx * dx + dy * dy);
-
         if (distance < (entity.getRadius() + entity2.getRadius())) {
             return true;
         }

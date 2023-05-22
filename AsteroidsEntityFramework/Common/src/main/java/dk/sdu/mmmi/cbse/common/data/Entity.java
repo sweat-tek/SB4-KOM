@@ -14,10 +14,6 @@ public class Entity implements Serializable {
     private float[] shapeY = new float[4];
     private float radius;
     private Map<Class, EntityPart> parts;
-
-    private int life;
-
-
     
     public Entity() {
         parts = new ConcurrentHashMap<>();
@@ -62,13 +58,4 @@ public class Entity implements Serializable {
     public void setShapeY(float[] shapeY) {
         this.shapeY = shapeY;
     }
-
-    public int getLife() {
-        return life;
-    }
-
-    public void setLife(int life) {
-        this.life = life;
-    }
-
 }
