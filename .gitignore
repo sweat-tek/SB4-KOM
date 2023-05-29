@@ -6,3 +6,4 @@
 *.jar
 /*/runner/
 /JavaModularAsteroids/nbproject/private/
+.idea/
