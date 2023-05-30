@@ -2,11 +2,9 @@ package core.main;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import asteroidsystem.Asteroid;
 import common.services.IPostEntityProcessingService;
 import common.util.SPILocator;
 import common.data.Entity;
@@ -15,9 +13,6 @@ import common.data.World;
 import common.services.IEntityProcessingService;
 import common.services.IGamePluginService;
 import core.managers.GameInputProcessor;
-import enemysystem.Enemy;
-import playersystem.Player;
-
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -87,35 +82,6 @@ public class Game
     private void draw() {
 
         for (Entity entity : world.getEntities()) {
-            if (entity instanceof Enemy) {
-                sr.setColor(Color.RED);
-            } else if (entity instanceof Player) {
-                sr.setColor(Color.LIME);
-            } else if (entity instanceof Asteroid) {
-                //Makes the asteroids have random colors
-                int random = (int) (Math.random() * 10);
-                if (random == 0){
-                    sr.setColor(Color.YELLOW);
-                } else if (random == 1){
-                    sr.setColor(Color.ORANGE);
-                } else if (random == 2){
-                    sr.setColor(Color.PURPLE);
-                } else if (random == 3){
-                    sr.setColor(Color.PINK);
-                } else if (random == 4){
-                    sr.setColor(Color.MAGENTA);
-                } else if (random == 5){
-                    sr.setColor(Color.LIGHT_GRAY);
-                } else if (random == 6){
-                    sr.setColor(Color.GOLD);
-                } else if (random == 7){
-                    sr.setColor(Color.MAROON);
-                } else if (random == 8){
-                    sr.setColor(Color.CYAN);
-                } else if (random == 9){
-                    sr.setColor(Color.BLUE);
-                }
-            }
 
             sr.begin(ShapeRenderer.ShapeType.Line);
 

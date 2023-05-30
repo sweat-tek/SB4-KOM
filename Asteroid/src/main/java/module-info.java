@@ -4,6 +4,7 @@ import common.services.IEntityProcessingService;
 import common.services.IGamePluginService;
 
 module Asteroid {
+    exports asteroidsystem;
     requires Common;
 
     provides IEntityProcessingService with AsteroidControlSystem;

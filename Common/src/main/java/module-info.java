@@ -7,6 +7,7 @@ module Common {
     exports common.events;
     exports common.services;
     exports common.util;
+    exports common.data.entityparts;
 
     uses IEntityProcessingService;
     uses IPostEntityProcessingService;
