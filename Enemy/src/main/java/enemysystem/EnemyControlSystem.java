@@ -26,24 +26,18 @@ public class EnemyControlSystem implements IEntityProcessingService {
             LifePart lifePart = enemy.getPart(LifePart.class);
 
             boolean shoot = false;
+            movingPart.setUp(false);
+            movingPart.setLeft(false);
+            movingPart.setRight(false);
 
-            int random = (int) (Math.random() * 4);
+            int random = (int) (Math.random() * 10);
             if (random == 0) {
                 movingPart.setUp(true);
-                movingPart.setLeft(false);
-                movingPart.setRight(false);
             } else if (random == 1) {
-                movingPart.setUp(false);
                 movingPart.setLeft(true);
-                movingPart.setRight(false);
             } else if (random == 2) {
-                movingPart.setUp(false);
-                movingPart.setLeft(false);
                 movingPart.setRight(true);
-            } else if (random == 3) {
-                movingPart.setUp(false);
-                movingPart.setLeft(false);
-                movingPart.setRight(false);
+            } else if (random == 9) {
                 shoot = true;
             }
 
