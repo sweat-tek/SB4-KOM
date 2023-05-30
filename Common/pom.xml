@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>Asteroids</groupId>
-        <artifactId>AsteroidsEntityFramework</artifactId>
+        <artifactId>CBSEAsteroidsGame</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>Common</artifactId>
