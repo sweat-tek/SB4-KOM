@@ -62,6 +62,12 @@
                     <workingDirectory>.</workingDirectory>
                     <longModulepath>false</longModulepath>
                     <arguments>
+                        <!--
+                                                On Mac Devices this line should not be commented out
+                                                <argument>-XstartOnFirstThread</argument>
+                        -->
+                        <argument>-Dorg.lwjgl.util.Debug=true</argument>
+                        <argument>-Djava.library.path=libs</argument>
                         <argument>--module-path=mods-mvn</argument>
                         <argument>--class-path=libs/*</argument>
                         <!-- because spark.core is an automatic module and actually required,
@@ -71,7 +77,7 @@
                         in "java.lang.module.FindException: Module monitor.observer.zero not found";
                         strange... -->
                         <!--<argument>&#45;&#45;add-modules=monitor.observer.zero</argument>-->
-                        <argument>--module=Core/dk.sdu.mmmi.cbse.main.Main</argument>
+                        <argument>--module=Core/core.main.Main</argument>
                     </arguments>
                 </configuration>
             </plugin>
@@ -96,6 +102,9 @@
                             <filesets>
                                 <fileset>
                                     <directory>mods-mvn</directory>
+                                </fileset>
+                                <fileset>
+                                    <directory>libs</directory>
                                 </fileset>
                             </filesets>
                         </configuration>
