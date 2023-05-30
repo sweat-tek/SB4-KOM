@@ -36,7 +36,7 @@ public class CollisionDetector implements IPostEntityProcessingService {
         }
     }
 
-    private boolean isColliding(Entity entity1, Entity entity2){
+    public static boolean isColliding(Entity entity1, Entity entity2){
         //Gets the position of the entities
         PositionPart entity1Position = entity1.getPart(PositionPart.class);
         PositionPart entity2Position = entity2.getPart(PositionPart.class);

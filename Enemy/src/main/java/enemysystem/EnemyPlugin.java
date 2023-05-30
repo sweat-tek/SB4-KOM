@@ -10,7 +10,7 @@ import common.services.IGamePluginService;
 
 public class EnemyPlugin implements IGamePluginService {
 
-    private Entity player;
+    private Entity enemy;
 
     public EnemyPlugin() {
     }
@@ -19,8 +19,8 @@ public class EnemyPlugin implements IGamePluginService {
     public void start(GameData gameData, World world) {
         
         // Add entities to the world
-        player = createEnemyShip(gameData);
-        world.addEntity(player);
+        enemy = createEnemyShip(gameData);
+        world.addEntity(enemy);
     }
 
     private Entity createEnemyShip(GameData gameData) {
@@ -46,7 +46,7 @@ public class EnemyPlugin implements IGamePluginService {
     @Override
     public void stop(GameData gameData, World world) {
         // Remove entities
-        world.removeEntity(player);
+        world.removeEntity(enemy);
     }
 
 }
