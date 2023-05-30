@@ -5,29 +5,36 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import common.services.IPostEntityProcessingService;
-import common.util.SPILocator;
 import common.data.Entity;
 import common.data.GameData;
 import common.data.World;
 import common.services.IEntityProcessingService;
 import common.services.IGamePluginService;
+import common.services.IPostEntityProcessingService;
 import core.managers.GameInputProcessor;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class Game
-        implements ApplicationListener {
+public class Game implements ApplicationListener {
 
     private static OrthographicCamera cam;
     private ShapeRenderer sr;
 
     private final GameData gameData = new GameData();
-    private List<IEntityProcessingService> entityProcessors = new ArrayList<>();
-    private List<IGamePluginService> entityPlugins = new ArrayList<>();
+
+    private final List<IEntityProcessingService> entityProcessors;
+    private final List<IPostEntityProcessingService> postEntityProcessors;
+    private final List<IGamePluginService> entityPlugins;
+
     private World world = new World();
+
+    public Game(List<IEntityProcessingService> entityProcessors,
+                List<IPostEntityProcessingService> postEntityProcessors,
+                List<IGamePluginService> entityPlugins){
+        this.entityProcessors = entityProcessors;
+        this.postEntityProcessors = postEntityProcessors;
+        this.entityPlugins = entityPlugins;
+    }
 
     @Override
     public void create() {
@@ -47,7 +54,7 @@ public class Game
 
 
         // Lookup all Game Plugins using ServiceLoader
-        for (IGamePluginService iGamePlugin : getPluginServices()) {
+        for (IGamePluginService iGamePlugin : entityPlugins) {
             iGamePlugin.start(gameData, world);
         }
     }
@@ -70,12 +77,12 @@ public class Game
 
     private void update() {
         // Update
-        for (IEntityProcessingService iEntityProcessingService: getEntityProcessingServices()){
-            iEntityProcessingService.process(gameData,world);
+        for (IEntityProcessingService iEntityProcessingService : entityProcessors) {
+            iEntityProcessingService.process(gameData, world);
         }
 
-        for (IPostEntityProcessingService postEntityProcessingService: getPostEntityProcessingServices()){
-            postEntityProcessingService.process(gameData,world);
+        for (IPostEntityProcessingService postEntityProcessingService : postEntityProcessors) {
+            postEntityProcessingService.process(gameData, world);
         }
     }
 
@@ -89,8 +96,8 @@ public class Game
             float[] shapey = entity.getShapeY();
 
             for (int i = 0, j = shapex.length - 1;
-                    i < shapex.length;
-                    j = i++) {
+                 i < shapex.length;
+                 j = i++) {
 
                 sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
             }
@@ -116,15 +123,4 @@ public class Game
     public void dispose() {
     }
 
-    private Collection<? extends IGamePluginService> getPluginServices() {
-        return SPILocator.locateAll(IGamePluginService.class);
-    }
-
-    private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
-        return SPILocator.locateAll(IEntityProcessingService.class);
-    }
-
-    private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
-        return SPILocator.locateAll(IPostEntityProcessingService.class);
-    }
 }
